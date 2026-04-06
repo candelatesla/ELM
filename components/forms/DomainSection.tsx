@@ -69,17 +69,7 @@ export function DomainSection({
                         <h5 className="font-semibold">{skill.title}</h5>
                         {skill.description ? <p className="mt-1 text-sm text-slate-500">{skill.description}</p> : null}
                       </div>
-                      <div className="grid gap-4 md:grid-cols-2">
-                        {(skill.fields ?? []).map((field) => (
-                          <div key={field.id} className={field.type === "textarea" ? "md:col-span-2" : ""}>
-                            <FieldRenderer
-                              field={field}
-                              value={entry.skills[skill.id]?.[field.id] ?? ""}
-                              onChange={(value) => onSkillFieldChange(skill.id, field.id, value)}
-                            />
-                          </div>
-                        ))}
-                      </div>
+                      {renderSkillFields(skill, entry, onSkillFieldChange)}
                     </article>
                   ))}
                 </div>
@@ -119,5 +109,90 @@ export function DomainSection({
         </div>
       ) : null}
     </section>
+  );
+}
+
+function renderSkillFields(
+  skill: DomainConfig["skills"][number],
+  entry: DomainEntry,
+  onSkillFieldChange: (skillId: string, fieldId: string, value: string | boolean) => void,
+) {
+  const fields = skill.fields ?? [];
+  const fieldMap = Object.fromEntries(fields.map((field) => [field.id, field]));
+
+  const snapshotLayoutIds = [
+    "observationDate1",
+    "observationDate2",
+    "observationNote1",
+    "observationNote2",
+    "observationScore1",
+    "observationScore2",
+    "followUpPlan",
+  ];
+
+  const isSnapshotLayout = snapshotLayoutIds.every((fieldId) => fieldMap[fieldId]);
+
+  if (!isSnapshotLayout) {
+    return (
+      <div className="grid gap-4 md:grid-cols-2">
+        {fields.map((field) => (
+          <div key={field.id} className={field.type === "textarea" ? "md:col-span-2" : ""}>
+            <FieldRenderer
+              field={field}
+              value={entry.skills[skill.id]?.[field.id] ?? ""}
+              onChange={(value) => onSkillFieldChange(skill.id, field.id, value)}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="grid gap-4 md:grid-cols-2">
+        {["observationDate1", "observationDate2"].map((fieldId) => (
+          <div key={fieldId}>
+            <FieldRenderer
+              field={fieldMap[fieldId]}
+              value={entry.skills[skill.id]?.[fieldId] ?? ""}
+              onChange={(value) => onSkillFieldChange(skill.id, fieldId, value)}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        {["observationNote1", "observationNote2"].map((fieldId) => (
+          <div key={fieldId}>
+            <FieldRenderer
+              field={fieldMap[fieldId]}
+              value={entry.skills[skill.id]?.[fieldId] ?? ""}
+              onChange={(value) => onSkillFieldChange(skill.id, fieldId, value)}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        {["observationScore1", "observationScore2"].map((fieldId) => (
+          <div key={fieldId}>
+            <FieldRenderer
+              field={fieldMap[fieldId]}
+              value={entry.skills[skill.id]?.[fieldId] ?? ""}
+              onChange={(value) => onSkillFieldChange(skill.id, fieldId, value)}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div>
+        <FieldRenderer
+          field={fieldMap.followUpPlan}
+          value={entry.skills[skill.id]?.followUpPlan ?? ""}
+          onChange={(value) => onSkillFieldChange(skill.id, "followUpPlan", value)}
+        />
+      </div>
+    </div>
   );
 }

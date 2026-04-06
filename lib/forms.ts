@@ -1,12 +1,35 @@
 import { DomainConfig } from "@/lib/types";
 
 const snapshotSkillFields = [
-  { id: "observedDate", label: "Observed/Assessed Date", type: "date" as const },
+  { id: "observationDate1", label: "Observation Date 1", type: "date" as const },
+  { id: "observationDate2", label: "Observation Date 2", type: "date" as const },
+  {
+    id: "observationNote1",
+    label: "Observation Note 1",
+    type: "textarea" as const,
+    placeholder: "Enter the first observation note",
+  },
+  {
+    id: "observationNote2",
+    label: "Observation Note 2",
+    type: "textarea" as const,
+    placeholder: "Enter the second observation note",
+  },
   {
     id: "followUpPlan",
     label: "Follow-Up Learning Plan",
     type: "textarea" as const,
     placeholder: "What is the next step for instruction or support?",
+  },
+  {
+    id: "observationScore1",
+    label: "Observation Score 1",
+    type: "score" as const,
+  },
+  {
+    id: "observationScore2",
+    label: "Observation Score 2",
+    type: "score" as const,
   },
 ];
 
