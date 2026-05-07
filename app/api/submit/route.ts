@@ -24,7 +24,7 @@ type SubmitBody = SnapshotBody | AssessmentBody;
 
 // ─── Column headers (must match Apps Script exactly) ──────────────────────────
 
-export const SNAPSHOT_HEADERS = [
+const SNAPSHOT_HEADERS = [
   "Submitted At", "State", "Teacher Name", "School Name", "Classroom Name", "Child Name",
   "Domain", "Skill Group", "Skill Name",
   "Observation Date 1", "Observation Note 1", "Observation Score 1",
@@ -32,7 +32,7 @@ export const SNAPSHOT_HEADERS = [
   "Follow-Up Learning Plan",
 ];
 
-export const ASSESSMENT_HEADERS = [
+const ASSESSMENT_HEADERS = [
   "Submitted At", "State", "Teacher Name", "School Name", "Classroom Name",
   "Domain", "Week", "Assessment Name", "Child Name",
   "Score", "Reassessment Date", "Reassessment Score", "Notes",
