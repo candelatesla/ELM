@@ -5,14 +5,8 @@ import { BasicInfo } from "@/lib/types";
 type BasicInfoFormProps = {
   value: BasicInfo;
   onChange: (field: keyof BasicInfo, value: string) => void;
+  hideChildName?: boolean;
 };
-
-const fields: Array<{ id: Exclude<keyof BasicInfo, "state">; label: string; type?: string }> = [
-  { id: "teacherName", label: "Teacher Name" },
-  { id: "schoolName", label: "School Name" },
-  { id: "classroomName", label: "Classroom Name" },
-  { id: "childName", label: "Child Name" },
-];
 
 const states = [
   { value: "Texas", label: "Texas" },
@@ -20,21 +14,31 @@ const states = [
   { value: "Georgia", label: "Georgia" },
 ];
 
-export function BasicInfoForm({ value, onChange }: BasicInfoFormProps) {
+export function BasicInfoForm({ value, onChange, hideChildName = false }: BasicInfoFormProps) {
+  const fields: Array<{ id: Exclude<keyof BasicInfo, "state">; label: string }> = [
+    { id: "teacherName", label: "Teacher Name" },
+    { id: "schoolName", label: "School Name" },
+    { id: "classroomName", label: "Classroom Name" },
+    ...(!hideChildName ? [{ id: "childName" as const, label: "Child Name" }] : []),
+  ];
+
+  const colCount = hideChildName ? 4 : 5;
+
   return (
     <section className="panel p-5 md:p-6">
       <div className="mb-5">
         <h2 className="text-xl font-semibold">Session details</h2>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+      <div
+        className="grid gap-4"
+        style={{ gridTemplateColumns: `repeat(${colCount}, minmax(0, 1fr))` }}
+      >
         <div>
           <label htmlFor="state">State</label>
-          <select id="state" value={value.state} onChange={(event) => onChange("state", event.target.value)}>
+          <select id="state" value={value.state} onChange={(e) => onChange("state", e.target.value)}>
             <option value="">Select state</option>
-            {states.map((state) => (
-              <option key={state.value} value={state.value}>
-                {state.label}
-              </option>
+            {states.map((s) => (
+              <option key={s.value} value={s.value}>{s.label}</option>
             ))}
           </select>
         </div>
@@ -43,9 +47,9 @@ export function BasicInfoForm({ value, onChange }: BasicInfoFormProps) {
             <label htmlFor={field.id}>{field.label}</label>
             <input
               id={field.id}
-              type={field.type ?? "text"}
+              type="text"
               value={value[field.id]}
-              onChange={(event) => onChange(field.id, event.target.value)}
+              onChange={(e) => onChange(field.id, e.target.value)}
             />
           </div>
         ))}

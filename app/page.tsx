@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { BasicInfoForm } from "@/components/forms/BasicInfoForm";
 import { DomainSection } from "@/components/forms/DomainSection";
 import { DomainSelector } from "@/components/forms/DomainSelector";
@@ -64,22 +65,6 @@ export default function HomePage() {
     }));
   }
 
-  function updateAssessmentField(domainId: DomainId, assessmentId: string, fieldId: string, value: string | boolean) {
-    setEntries((current) => ({
-      ...current,
-      [domainId]: {
-        ...current[domainId],
-        assessments: {
-          ...current[domainId].assessments,
-          [assessmentId]: {
-            ...current[domainId].assessments[assessmentId],
-            [fieldId]: value,
-          },
-        },
-      },
-    }));
-  }
-
   async function handleSubmit() {
     setIsSubmitting(true);
     setStatus({ type: "idle" });
@@ -112,6 +97,21 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(45,125,122,0.18),_transparent_28%),linear-gradient(180deg,_#f8fbfb_0%,_#f3f7f6_100%)]">
+      <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/95 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-8">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">ELM Progress Tracker</p>
+            <h1 className="text-lg font-bold text-slate-900">Snapshot Skills</h1>
+          </div>
+          <Link
+            href="/assessments"
+            className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-600 transition hover:border-warn hover:text-warn"
+          >
+            Week-Specific Assessments →
+          </Link>
+        </div>
+      </header>
+
       <div className="mx-auto max-w-7xl px-4 py-8 md:px-8 md:py-12">
         <div className="mb-6 space-y-6">
           <BasicInfoForm value={basicInfo} onChange={(field, value) => setBasicInfo((current) => ({ ...current, [field]: value }))} />
@@ -125,9 +125,7 @@ export default function HomePage() {
               domain={domainConfigMap[domainId]}
               entry={entries[domainId]}
               onSkillFieldChange={(skillId, fieldId, value) => updateSkillField(domainId, skillId, fieldId, value)}
-              onAssessmentFieldChange={(assessmentId, fieldId, value) =>
-                updateAssessmentField(domainId, assessmentId, fieldId, value)
-              }
+              onAssessmentFieldChange={() => {}}
             />
           ))}
         </div>

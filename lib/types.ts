@@ -70,6 +70,16 @@ export type DomainEntry = {
   assessments: Record<string, SkillEntry>;
 };
 
+export type StudentEntry = {
+  childName: string;
+  fields: Record<string, string | boolean>;
+};
+
+export type DomainAssessmentData = {
+  selectedAssessmentId: string;
+  students: StudentEntry[];
+};
+
 export type SubmissionPayload = {
   basicInfo: BasicInfo;
   selectedDomains: DomainId[];
