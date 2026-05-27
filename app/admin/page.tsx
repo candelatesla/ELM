@@ -8,8 +8,13 @@ export default function AdminPage() {
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">Config Preview</p>
           <h1 className="mt-2 text-3xl font-semibold">Form admin preview</h1>
           <p className="mt-3 max-w-3xl text-sm text-slate-600">
-            This route reads the same config used by the intake UI. To add or edit forms later, update
-            <code className="ml-1 rounded bg-slate-100 px-2 py-1 text-xs">lib/forms.ts</code> instead of rewriting the rendering logic.
+            This route reads the same config used by both the Snapshot Skills tool and the Week-Specific Assessments tool.
+            To add or edit sections later, update
+            <code className="ml-1 rounded bg-slate-100 px-2 py-1 text-xs">lib/forms.ts</code>
+            and keep the Google Sheets column mapping aligned with
+            <code className="ml-1 rounded bg-slate-100 px-2 py-1 text-xs">app/api/submit/route.ts</code>
+            and
+            <code className="ml-1 rounded bg-slate-100 px-2 py-1 text-xs">google-apps-script.js</code>.
           </p>
         </section>
 

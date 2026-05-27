@@ -144,6 +144,20 @@ export default function AssessmentsPage() {
             hideChildName
           />
 
+          <section className="panel p-5 md:p-6">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-warn">Scoring Key</p>
+                <p className="mt-1 text-sm text-slate-600">Use the same 0/1/2 scoring across all week-specific assessments.</p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-sm font-medium text-slate-700">0 = not yet</span>
+                <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-sm font-medium text-slate-700">1 = getting it</span>
+                <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-sm font-medium text-slate-700">2 = got it</span>
+              </div>
+            </div>
+          </section>
+
           {/* Domain selector */}
           <section className="panel p-5 md:p-6">
             <div className="mb-5">

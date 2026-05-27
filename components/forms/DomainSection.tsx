@@ -270,6 +270,7 @@ function renderSkillFields(
     "observationNote2",
     "observationScore1",
     "observationScore2",
+    "observationScore3",
     "followUpPlan",
   ];
 
@@ -315,8 +316,8 @@ function renderSkillFields(
           </div>
         ))}
       </div>
-      <div className="grid gap-4 md:grid-cols-2">
-        {["observationScore1", "observationScore2"].map((fieldId) => (
+      <div className="grid gap-4 md:grid-cols-3">
+        {["observationScore1", "observationScore2", "observationScore3"].map((fieldId) => (
           <div key={fieldId}>
             <FieldRenderer
               field={fieldMap[fieldId]}

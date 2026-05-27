@@ -31,6 +31,11 @@ const snapshotSkillFields = [
     label: "Observation Score 2",
     type: "score" as const,
   },
+  {
+    id: "observationScore3",
+    label: "Observation Score 3",
+    type: "score" as const,
+  },
 ];
 
 const reassessmentFields = [

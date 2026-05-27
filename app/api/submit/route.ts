@@ -29,6 +29,7 @@ const SNAPSHOT_HEADERS = [
   "Domain", "Skill Group", "Skill Name",
   "Observation Date 1", "Observation Note 1", "Observation Score 1",
   "Observation Date 2", "Observation Note 2", "Observation Score 2",
+  "Observation Score 3",
   "Follow-Up Learning Plan",
 ];
 
@@ -92,6 +93,7 @@ function flattenSnapshotRows(body: SnapshotBody, submittedAt: string): string[][
         String(skillData.observationDate2 ?? ""),
         String(skillData.observationNote2 ?? ""),
         String(skillData.observationScore2 ?? ""),
+        String(skillData.observationScore3 ?? ""),
         String(skillData.followUpPlan ?? ""),
       ]);
     }
