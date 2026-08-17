@@ -1,8 +1,9 @@
 # ELM Progress Tracker
 
-A lightweight Next.js app for ELM child progress entry, with two separate tools:
+A lightweight Next.js app for ELM child progress entry, with three separate tools:
 
-- `Snapshot Skills` at `/`
+- `Preschool Snapshot Skills` at `/`
+- `Infant/Toddler Snapshot` at `/infant-toddler`
 - `Week-Specific Assessments` at `/assessments`
 
 The app is config-driven, easy to host on Vercel, and designed to write rows into Google Sheets through a Google Apps Script webhook.
@@ -18,9 +19,9 @@ The app is config-driven, easy to host on Vercel, and designed to write rows int
 
 ## Current product shape
 
-### 1. Snapshot Skills
+### 1. Preschool Snapshot Skills
 
-The main tool at `/` is for Snapshot observations.
+The main tool at `/` is for preschool Snapshot observations.
 
 - Shared session details entered once
 - Domain picker
@@ -37,7 +38,17 @@ The main tool at `/` is for Snapshot observations.
 
 Submissions are flattened to one Google Sheets row per skill with data.
 
-### 2. Week-Specific Assessments
+### 2. Infant/Toddler Snapshot
+
+The infant/toddler tool at `/infant-toddler` combines the Birth-12 Months and 12-36 Months Snapshot documents into one electronic version.
+
+- Birth-12 and 12-36 items are grouped together by indicator
+- Infant/toddler teachers use the same Snapshot observation layout
+- There are no week-specific assessments for infant/toddler
+
+Submissions are flattened to one Google Sheets row per skill with data.
+
+### 3. Week-Specific Assessments
 
 The second tool at `/assessments` is for week-based assessment entry.
 
@@ -56,6 +67,7 @@ app/
   api/submit/route.ts        # Submission endpoint
   admin/page.tsx             # Config preview
   assessments/page.tsx       # Week-specific assessment tool
+  infant-toddler/page.tsx    # Infant/toddler Snapshot tool
   page.tsx                   # Snapshot skills tool
 components/
   forms/
@@ -68,6 +80,7 @@ components/
     FieldRenderer.tsx
 lib/
   forms.ts                   # Domain, skill, and assessment config
+  infantToddlerForms.ts      # Infant/toddler Snapshot config
   types.ts                   # Shared types
   utils.ts                   # Empty-state helpers
 google-apps-script.js        # Apps Script code for Google Sheets
@@ -89,7 +102,8 @@ npm run dev
 
 3. Open:
 
-- `http://localhost:3000/` for Snapshot Skills
+- `http://localhost:3000/` for Preschool Snapshot Skills
+- `http://localhost:3000/infant-toddler` for Infant/Toddler Snapshot
 - `http://localhost:3000/assessments` for Week-Specific Assessments
 
 If `3000` is busy, Next.js will use another local port.
@@ -178,7 +192,7 @@ These mirror the sheet-row structure, including header rows.
 
 ## How to update forms later
 
-Most changes happen in `lib/forms.ts`.
+Most preschool changes happen in `lib/forms.ts`. Infant/toddler Snapshot changes happen in `lib/infantToddlerForms.ts`.
 
 Examples:
 

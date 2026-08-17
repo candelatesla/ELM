@@ -6,7 +6,12 @@ export type DomainId =
   | "social-studies"
   | "creative-expression"
   | "science"
-  | "physical-health";
+  | "physical-health"
+  | "it-communication-language"
+  | "it-cognitive"
+  | "it-self-regulation"
+  | "it-social-emotional"
+  | "it-physical-health";
 
 export type FieldType =
   | "date"
@@ -81,6 +86,7 @@ export type DomainAssessmentData = {
 };
 
 export type SubmissionPayload = {
+  formType?: "snapshot" | "infant-toddler-snapshot";
   basicInfo: BasicInfo;
   selectedDomains: DomainId[];
   entries: Record<string, DomainEntry>;

@@ -125,12 +125,20 @@ export default function AssessmentsPage() {
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-warn">ELM Progress Tracker</p>
             <h1 className="text-lg font-bold text-slate-900">Week-Specific Assessments</h1>
           </div>
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-600 transition hover:border-accent hover:text-accent"
-          >
-            ← Snapshot Skills
-          </Link>
+          <div className="flex flex-wrap justify-end gap-2">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-600 transition hover:border-accent hover:text-accent"
+            >
+              Preschool Snapshot
+            </Link>
+            <Link
+              href="/infant-toddler"
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-600 transition hover:border-accent hover:text-accent"
+            >
+              Infant/Toddler Snapshot
+            </Link>
+          </div>
         </div>
       </header>
 

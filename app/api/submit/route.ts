@@ -2,12 +2,13 @@ import { promises as fs } from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
 import { domainConfigs } from "@/lib/forms";
+import { infantToddlerDomainConfigs } from "@/lib/infantToddlerForms";
 import { BasicInfo, DomainId, DomainEntry, DomainAssessmentData } from "@/lib/types";
 
 // ─── Payload shapes ────────────────────────────────────────────────────────────
 
 type SnapshotBody = {
-  formType?: "snapshot";
+  formType?: "snapshot" | "infant-toddler-snapshot";
   basicInfo: BasicInfo;
   selectedDomains: DomainId[];
   entries: Record<string, DomainEntry>;
@@ -61,9 +62,10 @@ function validate(body: SubmitBody): string | null {
 function flattenSnapshotRows(body: SnapshotBody, submittedAt: string): string[][] {
   const rows: string[][] = [];
   const { basicInfo, selectedDomains, entries } = body;
+  const snapshotDomains = body.formType === "infant-toddler-snapshot" ? infantToddlerDomainConfigs : domainConfigs;
 
   for (const domainId of selectedDomains) {
-    const domain = domainConfigs.find((d) => d.id === domainId);
+    const domain = snapshotDomains.find((d) => d.id === domainId);
     if (!domain) continue;
 
     const domainEntry = entries[domainId];

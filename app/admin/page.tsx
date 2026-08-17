@@ -1,4 +1,5 @@
 import { domainConfigs } from "@/lib/forms";
+import { infantToddlerDomainConfigs } from "@/lib/infantToddlerForms";
 
 export default function AdminPage() {
   return (
@@ -11,11 +12,31 @@ export default function AdminPage() {
             This route reads the same config used by both the Snapshot Skills tool and the Week-Specific Assessments tool.
             To add or edit sections later, update
             <code className="ml-1 rounded bg-slate-100 px-2 py-1 text-xs">lib/forms.ts</code>
+            or
+            <code className="ml-1 rounded bg-slate-100 px-2 py-1 text-xs">lib/infantToddlerForms.ts</code>
             and keep the Google Sheets column mapping aligned with
             <code className="ml-1 rounded bg-slate-100 px-2 py-1 text-xs">app/api/submit/route.ts</code>
             and
             <code className="ml-1 rounded bg-slate-100 px-2 py-1 text-xs">google-apps-script.js</code>.
           </p>
+        </section>
+
+        <section className="panel p-6">
+          <div className="mb-4">
+            <h2 className="text-2xl font-semibold">Infant/Toddler Snapshot</h2>
+            <p className="mt-1 text-sm text-slate-600">
+              Birth-12 and 12-36 month indicators combined by domain and indicator group.
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {infantToddlerDomainConfigs.map((domain) => (
+              <div key={domain.id} className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                <h3 className="font-semibold">{domain.title}</h3>
+                <p className="mt-1 text-sm text-slate-600">{domain.skills.length} Snapshot skills</p>
+              </div>
+            ))}
+          </div>
         </section>
 
         <div className="grid gap-6">
